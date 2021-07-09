@@ -1,0 +1,17 @@
+# Pacman
+alias i='sudo pacman -S'
+alias r='sudo pacman -Rscn'
+alias clean='sudo pacman -Rs $(sudo pacman -Qqtd)'
+
+# Mirrors
+alias upmr='sudo reflector --latest 10 --country BR,CL,US --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
+
+# Utils
+alias ls='exa -al --color=always --icons --group-directories-first --git'
+alias neofetch='neofetch --colors 1 1 1 1 1 7 --ascii_colors 1 1 1 1 1 1'
+alias d="sudo yadm -Y /etc/yadm"
+
+# Systemd
+alias start-postgres='sudo systemctl start postgresql.service'
+alias start-mongo='sudo systemctl start mongodb.service'
+alias start-docker='sudo systemctl start docker.service'
