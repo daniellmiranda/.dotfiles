@@ -15,3 +15,6 @@ alias d="sudo yadm -Y /etc/yadm"
 alias start-postgres='sudo systemctl start postgresql.service'
 alias start-mongo='sudo systemctl start mongodb.service'
 alias start-docker='sudo systemctl start docker.service'
+
+# Git
+alias 'git-log'="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
