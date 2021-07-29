@@ -6,7 +6,8 @@ git submodule update
 
 ZSHRC=$HOME/.zshrc
 ZSH_ALIASES=$HOME/.zsh_aliases
-GITCONFIG=$HOME/.wslconfig
+GITCONFIG=$HOME/.gitconfig
+WSLCONFIG=/mnt/c/Users/daniellmiranda
 
 # zsh
 test -f ZSHRC && rm ZSHRC
@@ -18,7 +19,8 @@ test -f GITCONFIG && rm GITCONFIG
 stow -t "$HOME" git
 
 # wsl2
-cp ./wsl/.wslconfig /mnt/c/Users/daniellmiranda
+test -f WSLCONFIG && rm WSLCONFIG
+cp -f ./wsl/.wslconfig /mnt/c/Users/daniellmiranda
 
 # windows terminal
 cp ./windows-terminal/settings.json /mnt/c/Users/daniellmiranda/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
