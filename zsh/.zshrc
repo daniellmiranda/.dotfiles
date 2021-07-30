@@ -1,8 +1,6 @@
 # Path to your oh-my-zsh installation
 export ZSH="/home/daniellmiranda/.oh-my-zsh"
 
-# Test
-
 # Theme
 ZSH_THEME="robbyrussell"
 
