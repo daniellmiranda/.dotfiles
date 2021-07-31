@@ -13,6 +13,7 @@ WSLCONFIG=/mnt/c/Users/daniellmiranda
 test -f ZSHRC && rm ZSHRC
 test -f ZSH_ALIASES && rm ZSH_ALIASES
 stow -t "$HOME" zsh
+source ~/.zshrc
 
 # git
 test -f GITCONFIG && rm GITCONFIG 
