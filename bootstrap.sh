@@ -22,16 +22,9 @@ for i in $packages; do
 done
 
 # zsh
-<<<<<<< Updated upstream
-test -f ZSHRC && rm ZSHRC
-test -f ZSH_ALIASES && rm ZSH_ALIASES
-stow -t "$HOME" zsh
-source ~/.zshrc
-=======
 rm -f $ZSHRC
 rm -f $ZSH_ALIASES
 stow -t ~ zsh
->>>>>>> Stashed changes
 
 # git
 rm -f $GITCONFIG 
