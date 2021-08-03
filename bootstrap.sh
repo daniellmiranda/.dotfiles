@@ -21,6 +21,9 @@ for i in $packages; do
   fi
 done
 
+# install/update nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+
 # zsh
 rm -f $ZSHRC
 rm -f $ZSH_ALIASES
