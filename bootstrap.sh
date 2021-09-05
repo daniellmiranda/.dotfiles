@@ -22,13 +22,19 @@ for i in $packages; do
 done
 
 # installs Aura Package Manager from the AUR
-cd $HOME
-git clone https://aur.archlinux.org/aura-bin.git
-cd aura-bin
-makepkg -si
+if ! pacman -Qi aura-bin > /dev/null 2>&1; then
+  cd $HOME
+  git clone https://aur.archlinux.org/aura-bin.git
+  cd aura-bin
+  makepkg -si
+  rm -r aura-bin
+fi
+
 
 # installs Pazi from AUR
-sudo aura -A pazi
+if ! pacman -Qi pazi > /dev/null 2>&1; then
+  sudo aura -A pazi
+fi
 
 # install/update nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
@@ -55,3 +61,13 @@ fi
 
 # installs/updates zinit
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+
+# # adds zinit plugins
+if ! grep -q "# Zinit plugins" $ZSHRC; then
+  echo "
+# Zinit plugins
+zinit light denysdovhan/spaceship-prompt
+zinit light zdharma/fast-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions" >> $ZSHRC
+fi
