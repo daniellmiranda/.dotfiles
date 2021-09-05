@@ -55,12 +55,6 @@ SPACESHIP_VENV_COLOR=#377cf1
 SPACESHIP_NODE_SHOW=true
 SPACESHIP_DOCKER_SHOW=true
 
-# Zinit plugins
-zinit light denysdovhan/spaceship-prompt
-zinit light zdharma/fast-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
-
 ### Android Home
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
