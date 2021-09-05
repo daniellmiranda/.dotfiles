@@ -12,14 +12,23 @@ GITCONFIG=$HOME/.gitconfig
 WSLCONFIG=/mnt/c/Users/daniellmiranda
 WINDOWS_TERMINAL=/mnt/c/Users/daniellmiranda/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 
-# packages to be installed
-packages=('git' 'zsh' 'paru' 'stow')
+# packages to be installed (in official Arch repos)
+packages=('git' 'zsh' 'base-devel' 'stow' 'bat')
 
 for i in $packages; do
   if ! pacman -Qi $i > /dev/null 2>&1; then
     sudo pacman -S $i > /dev/null 2>&1
   fi
 done
+
+# installs Aura Package Manager from the AUR
+cd $HOME
+git clone https://aur.archlinux.org/aura-bin.git
+cd aura-bin
+makepkg -si
+
+# installs Pazi from AUR
+sudo aura -A pazi
 
 # install/update nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
