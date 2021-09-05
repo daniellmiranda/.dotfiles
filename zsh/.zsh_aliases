@@ -2,7 +2,7 @@
 alias i='sudo pacman -S'
 alias r='sudo pacman -Rscn'
 alias clean='sudo pacman -Rs $(sudo pacman -Qqtd)'
-alias up='paru && pnpm add -g pnpm && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash'
+alias up='sudo aura -Au && sudo aura -Syu && pnpm add -g pnpm && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash'
 
 # Mirrors
 alias upmr='sudo reflector --latest 10 --country BR,CL,US --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
