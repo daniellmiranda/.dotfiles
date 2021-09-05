@@ -55,20 +55,6 @@ SPACESHIP_VENV_COLOR=#377cf1
 SPACESHIP_NODE_SHOW=true
 SPACESHIP_DOCKER_SHOW=true
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
-
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-### End of Zinit's installer chunk
-
 # Zinit plugins
 zinit light denysdovhan/spaceship-prompt
 zinit light zdharma/fast-syntax-highlighting
@@ -98,7 +84,3 @@ export NVM_DIR="$HOME/.nvm"
 
 # ZSH Custom
 source $HOME/.zsh_aliases
-
-# Deno
-export DENO_INSTALL="/home/daniellmiranda/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
