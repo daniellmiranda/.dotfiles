@@ -3,14 +3,12 @@
     // Add custom actions and keybindings to this array.
     // To unbind a key combination from your defaults.json, set the command to "unbound".
     // To learn more about actions and keybindings, visit https://aka.ms/terminal-keybindings
-    "actions": 
-    [
+    "actions": [
         // Copy and paste are bound to Ctrl+Shift+C and Ctrl+Shift+V in your defaults.json.
         // These two lines additionally bind them to Ctrl+C and Ctrl+V.
         // To learn more about selection, visit https://aka.ms/terminal-selection
         {
-            "command": 
-            {
+            "command": {
                 "action": "copy",
                 "singleLine": false
             },
@@ -30,8 +28,7 @@
         // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
         // To learn more about panes, visit https://aka.ms/terminal-panes
         {
-            "command": 
-            {
+            "command": {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
@@ -42,10 +39,10 @@
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
-    "profiles": 
-    {
-        "defaults": 
-        {
+    "initialCols": 100,
+    "initialRows": 25,
+    "profiles": {
+        "defaults": {
             "acrylicOpacity": 0.8,
             "colorScheme": "Wolves League Dark",
             "fontFace": "JetBrainsMono Nerd Font",
@@ -53,8 +50,7 @@
             "tabColor": "#222425",
             "useAcrylic": true
         },
-        "list": 
-        [
+        "list": [
             {
                 "guid": "{a5a97cb8-8961-5535-816d-772efe0c6a3f}",
                 "hidden": false,
@@ -82,8 +78,7 @@
             }
         ]
     },
-    "schemes": 
-    [
+    "schemes": [
         {
             "background": "#0C0C0C",
             "black": "#0C0C0C",
