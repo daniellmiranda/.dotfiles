@@ -53,28 +53,12 @@ rm -f $GITCONFIG
 stow -t $HOME git
 
 # wsl2 - comment to disable ram limit
-# cp -f ./wsl/.wslconfig /mnt/c/Users/daniellmiranda
+cp -f ./wsl/.wslconfig /mnt/c/Users/daniellmiranda
 
 # windows terminal
 cp ./windows-terminal/settings.json $WINDOWS_TERMINAL
 
-# installs oh my zsh
-if ! [ -d "$OMZ_DIR" ] > /dev/null 2>&1; then
-  sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
 
-# installs/updates zinit
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
-
-# # adds zinit plugins
-if ! grep -q "# Zinit plugins" $ZSHRC; then
-  echo "
-# Zinit plugins
-zinit light denysdovhan/spaceship-prompt
-zinit light zdharma/fast-syntax-highlighting
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions" >> $ZSHRC
-fi
 
 # install/update nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
