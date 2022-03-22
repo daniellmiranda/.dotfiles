@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
 
+# This script should be run in Arch Linux
+
 # script path
-script_path=${pwd}
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # files paths
 ZSHRC=$HOME/.zshrc
 ZSH_ALIASES=$HOME/.zsh_aliases
-OMZ_DIR=$HOME/.oh-my-zsh
 GITCONFIG=$HOME/.gitconfig
-WSLCONFIG=/mnt/c/Users/daniellmiranda
-WINDOWS_TERMINAL=/mnt/c/Users/daniellmiranda/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 
 # packages to be installed (in official Arch repos)
-packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch')
+packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'exa' 'sof-firmware' 'docker' 'docker-compose' 'dbeaver' 'gnome-themes-extra' 'wget')
 packages_groups=('base-devel')
 
 for i in ${packages[@]}; do
@@ -35,13 +34,16 @@ if ! pacman -Qi aura-bin > /dev/null 2>&1; then
   makepkg -si --noconfirm
   cd $HOME
   sudo rm -r aura-bin
-  cd $script_path
+  cd $SCRIPT_DIR
 fi
 
 # installs Pazi from AUR
 if ! pacman -Qi pazi > /dev/null 2>&1; then
   sudo aura -A pazi --noconfirm
 fi
+
+# antigen
+curl -L git.io/antigen > $HOME/antigen.zsh
 
 # zsh
 rm -f $ZSHRC
@@ -52,13 +54,14 @@ stow -t $HOME zsh
 rm -f $GITCONFIG 
 stow -t $HOME git
 
-# wsl2 - comment to disable ram limit
-cp -f ./wsl/.wslconfig /mnt/c/Users/daniellmiranda
-
-# windows terminal
-cp ./windows-terminal/settings.json $WINDOWS_TERMINAL
-
-
-
 # install/update nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+
+# install JetBrainsMono NerdFont
+cd $SCRIPT_DIR
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+unzip JetBrainsMono.zip -d ./JetBrainsMonoNerdFont
+mv JetBrainsMonoNerdFont $HOME/.fonts
+rm -r ./JetBrainsMonoNerdFont
+rm ./JetBrainsMono.zip
+
