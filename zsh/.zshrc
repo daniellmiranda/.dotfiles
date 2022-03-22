@@ -7,14 +7,11 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-completions
 antigen apply
 
-# Automatically update without prompting
-DISABLE_UPDATE_PROMPT="true"
-
 # ZSH Aliases
 source ~/.zsh_aliases
 
 # Theme
-ZSH_THEME="robbyrussell"
+ZSH_THEME="spaceship"
 
 SPACESHIP_PROMPT_ORDER=(
   user          # Username section
@@ -51,25 +48,6 @@ plugins=(
 	virtualenv
 )
 
-# Android
-export ANDROID_HOME=~/Android
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-export PATH=$PATH:$JAVA_HOME/bin
-export ANDROID_SDK_ROOT="$ANDROID_SDK_ROOT"
-export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
-export ADB_SERVER_SOCKET=tcp:$WSL_HOST:5037
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vi'
-fi
-
 ### Pazi
 if command -v pazi &>/dev/null; then
   eval "$(pazi init zsh)" # or 'bash'
@@ -83,11 +61,3 @@ export EXA_COLORS="uu=31:da=37"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# PNPM
-export PNPM_HOME="/home/daniellmiranda/.local/share/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
