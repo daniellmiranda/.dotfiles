@@ -10,10 +10,12 @@ ZSHRC=$HOME/.zshrc
 ZSH_ALIASES=$HOME/.zsh_aliases
 GITCONFIG=$HOME/.gitconfig
 
-# packages to be installed (in official Arch repos)
+# packages to be installed
 packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'exa' 'sof-firmware' 'docker' 'docker-compose' 'dbeaver' 'gnome-themes-extra' 'wget')
 packages_groups=('base-devel')
+aur_packages=('visual-studio-code-bin' 'brave-bin' 'pazi')
 
+# install packages in official repositories
 for i in ${packages[@]}; do
   if ! pacman -Qi $i > /dev/null 2>&1; then
     sudo pacman -S $i --noconfirm
@@ -41,6 +43,13 @@ fi
 if ! pacman -Qi pazi > /dev/null 2>&1; then
   sudo aura -A pazi --noconfirm
 fi
+
+# installs packages from AUR
+for i in ${aur_packages[@]}; do
+  if ! pacman -Qi $i > /dev/null 2>&1; then
+    sudo aura -A $i --noconfirm
+  fi
+done
 
 # antigen
 curl -L git.io/antigen > $HOME/antigen.zsh
