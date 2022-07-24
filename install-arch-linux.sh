@@ -11,9 +11,10 @@ ZSH_ALIASES=$HOME/.zsh_aliases
 GITCONFIG=$HOME/.gitconfig
 
 # packages to be installed
-packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'exa' 'sof-firmware' 'docker' 'docker-compose' 'dbeaver' 'gnome-themes-extra' 'wget')
+packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'exa' 'sof-firmware' 'docker' 'docker-compose' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak')
 packages_groups=('base-devel')
-aur_packages=('visual-studio-code-bin' 'brave-bin' 'pazi')
+aur_packages=('visual-studio-code-bin' 'brave-bin' 'pazi' 'asdf-vm')
+flatpak_packages=('com.raggesilver.BlackBox')
 
 # install packages in official repositories
 for i in ${packages[@]}; do
@@ -28,6 +29,12 @@ for i in ${packages_groups[@]}; do
   fi
 done
 
+for i in ${flatpak_packages[@]}; do
+  if ! pacman -Qg $i > /dev/null 2>&1; then
+    flatpak install flathub $i
+  fi
+done
+
 # installs Aura Package Manager from the AUR
 if ! pacman -Qi aura-bin > /dev/null 2>&1; then
   cd $HOME
@@ -37,11 +44,6 @@ if ! pacman -Qi aura-bin > /dev/null 2>&1; then
   cd $HOME
   sudo rm -r aura-bin
   cd $SCRIPT_DIR
-fi
-
-# installs Pazi from AUR
-if ! pacman -Qi pazi > /dev/null 2>&1; then
-  sudo aura -A pazi --noconfirm
 fi
 
 # installs packages from AUR
@@ -58,13 +60,11 @@ curl -L git.io/antigen > $HOME/antigen.zsh
 rm -f $ZSHRC
 rm -f $ZSH_ALIASES
 stow -t $HOME zsh
+chsh -s $(which zsh)
 
 # git
 rm -f $GITCONFIG 
 stow -t $HOME git
-
-# install/update nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
 # install JetBrainsMono NerdFont
 cd $SCRIPT_DIR
@@ -74,3 +74,8 @@ mv JetBrainsMonoNerdFont $HOME/.fonts
 rm -r ./JetBrainsMonoNerdFont
 rm ./JetBrainsMono.zip
 
+# installs and configures nodejs with asdf
+asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+asdf install nodejs latest
+asdf install nodejs lts
+asdf global nodejs latest
