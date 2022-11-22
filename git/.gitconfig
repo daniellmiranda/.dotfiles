@@ -1,7 +1,10 @@
 [user]
 	name = Daniel L. Miranda
-	email = danieldelacerdamiranda@protonmail.com
+	email = danieldelacerdamiranda@proton.me
+	signingkey = 81A8FEAD1D921324
 [init]
 	defaultBranch = main
 [core]
 	editor = vim
+[commit]
+	gpgsign = true
