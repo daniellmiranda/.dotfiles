@@ -12,7 +12,7 @@ GITCONFIG=$HOME/.gitconfig
 WINDOWS_TERMINAL=/mnt/c/Users/daniellmiranda/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 
 # packages to be installed (in official Arch repos)
-packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'exa')
+packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'exa' 'flatpak')
 packages_groups=('base-devel')
 
 for i in ${packages[@]}; do
@@ -43,6 +43,11 @@ if ! pacman -Qi pazi > /dev/null 2>&1; then
   sudo aura -A pazi --noconfirm
 fi
 
+# installs ASDF from AUR
+if ! pacman -Qi pazi > /dev/null 2>&1; then
+  sudo aura -A asdf-vm --noconfirm
+fi
+
 # antigen
 curl -L git.io/antigen > $HOME/antigen.zsh
 
@@ -57,6 +62,3 @@ stow -t $HOME git
 
 # windows terminal
 cp ./windows-terminal/settings.json $WINDOWS_TERMINAL
-
-# install/update nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
