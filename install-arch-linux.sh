@@ -11,9 +11,9 @@ ZSH_ALIASES=$HOME/.zsh_aliases
 GITCONFIG=$HOME/.gitconfig
 
 # packages to be installed
-packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'exa' 'sof-firmware' 'docker' 'docker-compose' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak')
+packages=('git' 'zsh' 'stow' 'firefox' 'bat' 'reflector' 'neofetch' 'exa' 'sof-firmware' 'docker' 'docker-compose' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak')
 packages_groups=('base-devel')
-aur_packages=('visual-studio-code-bin' 'brave-bin' 'pazi' 'asdf-vm')
+aur_packages=('visual-studio-code-bin' 'pazi' 'asdf-vm')
 flatpak_packages=('com.raggesilver.BlackBox')
 
 # install packages in official repositories
@@ -74,7 +74,7 @@ mv JetBrainsMonoNerdFont $HOME/.fonts
 rm -r ./JetBrainsMonoNerdFont
 rm ./JetBrainsMono.zip
 
-# installs and configures nodejs with asdf
+# installs and configures nodejs with ASDF
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs latest
 asdf install nodejs lts
