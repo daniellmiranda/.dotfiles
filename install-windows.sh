@@ -13,7 +13,7 @@ STARSHIP=$HOME/.config/starship.toml
 WINDOWS_TERMINAL=/mnt/c/Users/daniellmiranda/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 
 # packages to be installed (in official Arch repos)
-packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'exa' 'flatpak')
+packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'exa' 'flatpak starship')
 packages_groups=('base-devel')
 
 for i in ${packages[@]}; do
