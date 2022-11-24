@@ -12,7 +12,7 @@ GITCONFIG=$HOME/.gitconfig
 STARSHIP=$HOME/.config/starship.toml
 
 # packages to be installed
-packages=('git' 'zsh' 'stow' 'firefox' 'bat' 'reflector' 'neofetch' 'exa' 'sof-firmware' 'docker' 'docker-compose' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak starship')
+packages=('git' 'zsh' 'stow' 'firefox' 'bat' 'reflector' 'neofetch' 'exa' 'sof-firmware' 'docker' 'docker-compose' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak' 'starship')
 packages_groups=('base-devel')
 aur_packages=('visual-studio-code-bin' 'pazi' 'asdf-vm')
 flatpak_packages=('com.raggesilver.BlackBox')
