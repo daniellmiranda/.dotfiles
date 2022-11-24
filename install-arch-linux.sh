@@ -9,6 +9,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ZSHRC=$HOME/.zshrc
 ZSH_ALIASES=$HOME/.zsh_aliases
 GITCONFIG=$HOME/.gitconfig
+STARSHIP=$HOME/.config/starship.toml
 
 # packages to be installed
 packages=('git' 'zsh' 'stow' 'firefox' 'bat' 'reflector' 'neofetch' 'exa' 'sof-firmware' 'docker' 'docker-compose' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak')
@@ -62,13 +63,17 @@ rm -f $ZSH_ALIASES
 stow -t $HOME zsh
 chsh -s $(which zsh)
 
+# starship
+rm -f $STARSHIP
+stow -t $HOME/.config starship
+
 # git
 rm -f $GITCONFIG 
 stow -t $HOME git
 
 # install JetBrainsMono NerdFont
 cd $SCRIPT_DIR
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBrainsMono.zip
 unzip JetBrainsMono.zip -d ./JetBrainsMonoNerdFont
 mv JetBrainsMonoNerdFont $HOME/.fonts
 rm -r ./JetBrainsMonoNerdFont

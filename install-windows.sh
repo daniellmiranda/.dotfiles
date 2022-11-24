@@ -9,6 +9,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ZSHRC=$HOME/.zshrc
 ZSH_ALIASES=$HOME/.zsh_aliases
 GITCONFIG=$HOME/.gitconfig
+STARSHIP=$HOME/.config/starship.toml
 WINDOWS_TERMINAL=/mnt/c/Users/daniellmiranda/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
 
 # packages to be installed (in official Arch repos)
@@ -59,6 +60,10 @@ stow -t $HOME zsh
 # git
 rm -f $GITCONFIG 
 stow -t $HOME git
+
+# starship
+rm -f $STARSHIP
+stow -t $HOME/.config starship
 
 # windows terminal
 cp ./windows-terminal/settings.json $WINDOWS_TERMINAL
