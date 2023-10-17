@@ -8,8 +8,9 @@ alias up='sudo aura -Au && sudo aura -Syu && flatpak update'
 alias upmr='sudo reflector --latest 10 --country BR,CL,US --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
 
 # Utils
-alias ls='exa -al --color=always --icons --group-directories-first --git'
+alias ls='eza -al --color=always --icons --group-directories-first --git'
 alias neofetch='neofetch --colors 1 1 1 1 1 7 --ascii_colors 1 1 1 1 1 1'
+alias vim='nvim'
 
 # Git
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
