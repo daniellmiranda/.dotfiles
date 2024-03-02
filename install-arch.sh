@@ -9,12 +9,11 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 ZSHRC=$HOME/.zshrc
 ZSH_ALIASES=$HOME/.zsh_aliases
 GITCONFIG=$HOME/.gitconfig
-STARSHIP=$HOME/.config/starship.toml
 
 # packages to be installed
-packages=('git' 'zsh' 'stow' 'firefox' 'bat' 'reflector' 'neofetch' 'eza' 'sof-firmware' 'docker' 'docker-compose' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak' 'starship')
+packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'eza' 'sof-firmware' 'docker' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak')
 packages_groups=('base-devel')
-aur_packages=('visual-studio-code-bin' 'pazi' 'asdf-vm')
+aur_packages=('visual-studio-code-bin')
 flatpak_packages=('com.raggesilver.BlackBox')
 
 # install packages in official repositories
@@ -54,18 +53,11 @@ for i in ${aur_packages[@]}; do
   fi
 done
 
-# antigen
-curl -L git.io/antigen > $HOME/antigen.zsh
-
 # zsh
 rm -f $ZSHRC
 rm -f $ZSH_ALIASES
 stow -t $HOME zsh
 chsh -s $(which zsh)
-
-# starship
-rm -f $STARSHIP
-stow -t $HOME/.config starship
 
 # git
 rm -f $GITCONFIG 
@@ -78,9 +70,3 @@ unzip JetBrainsMono.zip -d ./JetBrainsMonoNerdFont
 mv JetBrainsMonoNerdFont $HOME/.fonts
 rm -r ./JetBrainsMonoNerdFont
 rm ./JetBrainsMono.zip
-
-# installs and configures nodejs with ASDF
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf install nodejs latest
-asdf install nodejs lts
-asdf global nodejs latest

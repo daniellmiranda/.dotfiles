@@ -5,15 +5,17 @@
 # script path
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+# Get the Windows username
+WINDOWS_USERNAME=$(powershell.exe -c "Write-Host -NoNewLine ([Environment]::UserName)")
+
 # files paths
 ZSHRC=$HOME/.zshrc
 ZSH_ALIASES=$HOME/.zsh_aliases
 GITCONFIG=$HOME/.gitconfig
-STARSHIP=$HOME/.config/starship.toml
-WINDOWS_TERMINAL=/mnt/c/Users/daniellmiranda/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState
+WINDOWS_TERMINAL=/mnt/c/Users/$WINDOWS_USERNAME/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/
 
 # packages to be installed (in official Arch repos)
-packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'eza' 'flatpak' 'starship')
+packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'eza')
 packages_groups=('base-devel')
 
 for i in ${packages[@]}; do
@@ -39,19 +41,6 @@ if ! pacman -Qi aura-bin > /dev/null 2>&1; then
   cd $SCRIPT_DIR
 fi
 
-# installs Pazi from AUR
-if ! pacman -Qi pazi > /dev/null 2>&1; then
-  sudo aura -A pazi --noconfirm
-fi
-
-# installs ASDF from AUR
-if ! pacman -Qi pazi > /dev/null 2>&1; then
-  sudo aura -A asdf-vm --noconfirm
-fi
-
-# antigen
-curl -L git.io/antigen > $HOME/antigen.zsh
-
 # zsh
 rm -f $ZSHRC
 rm -f $ZSH_ALIASES
@@ -60,10 +49,6 @@ stow -t $HOME zsh
 # git
 rm -f $GITCONFIG 
 stow -t $HOME git
-
-# starship
-rm -f $STARSHIP
-stow -t $HOME/.config starship
 
 # windows terminal
 cp ./windows-terminal/settings.json $WINDOWS_TERMINAL
