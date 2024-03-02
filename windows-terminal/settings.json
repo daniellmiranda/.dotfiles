@@ -38,7 +38,7 @@
   ],
   "profiles": {
     "defaults": {
-      "opacity": 0,
+      "opacity": 60,
       "colorScheme": "Wolves League Dark",
       "font": {
         "face": "JetBrainsMono Nerd Font",
