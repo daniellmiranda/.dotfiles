@@ -1,52 +1,71 @@
-# Antigen
-source ~/antigen.zsh
-antigen use oh-my-zsh
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle zsh-users/zsh-history-substring-search
-antigen apply
+# Antidote
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+# Set the name of the static .zsh plugins file antidote will generate.
+zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins.zsh
 
-# ZSH Aliases
-source ~/.zsh_aliases
+# Ensure you have a .zsh_plugins.txt file where you can add plugins.
+[[ -f ${zsh_plugins:r}.txt ]] || touch ${zsh_plugins:r}.txt
 
-# Theme
-ZSH_THEME="starship"
+# Lazy-load antidote.
+fpath+=(${ZDOTDIR:-~}/.antidote)
+autoload -Uz $fpath[-1]/antidote
 
-# Plugins
-plugins=(
-	git
-	virtualenv
-)
-
-### Pazi
-if command -v pazi &>/dev/null; then
-  eval "$(pazi init zsh)"
+# Generate static file in a subshell when .zsh_plugins.txt is updated.
+if [[ ! $zsh_plugins -nt ${zsh_plugins:r}.txt ]]; then
+  (antidote bundle <${zsh_plugins:r}.txt >|$zsh_plugins)
 fi
 
-### Exa
-export LS_COLORS="di=31:*.git*=38;5;202:*.js=33:*.ts=34:*.md=37"
-export EXA_COLORS="uu=31:da=37"
+# Source your static plugins file.
+source $zsh_plugins
 
-### ASDF
-. /opt/asdf-vm/asdf.sh
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Load Pure Prompt on startup
+autoload -U promptinit; promptinit
+prompt powerlevel10k
+
+# Aliases
+source ~/.zsh_aliases
 
 ### GPG
 export GPG_TTY=$(tty)
 
-eval "$(starship init zsh)"
+# Eza
+export LS_COLORS="di=31:*.git*=38;5;202:*.js=33:*.ts=34:*.md=37"
+export EZA_COLORS="uu=31:da=37"
 
-# pnpm
+# PNPM
 export PNPM_HOME="/home/daniellmiranda/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
-# bun completions
+# Bun
 [ -s "/home/daniellmiranda/.bun/_bun" ] && source "/home/daniellmiranda/.bun/_bun"
-
-# bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Java
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PATH=$PATH:$JAVA_HOME/bin
+
+# Android
+export ANDROID_HOME="$HOME/Android"
+export PATH=$PATH:"$ANDROID_HOME/cmdline-tools/tools"
+export PATH=$PATH:"$ANDROID_HOME/cmdline-tools/tools/bin"
+export PATH=$PATH:"$ANDROID_HOME/platform-tools"
+alias adb=$ANDROID_HOME"/platform-tools/adb.exe"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

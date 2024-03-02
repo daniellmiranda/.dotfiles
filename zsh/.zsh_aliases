@@ -2,7 +2,7 @@
 alias i='sudo pacman -S'
 alias r='sudo pacman -Rscn'
 alias clean='sudo pacman -Rs $(sudo pacman -Qqtd)'
-alias up='sudo aura -Au && sudo aura -Syu && flatpak update'
+alias up='sudo aura -Au && sudo aura -Syu'
 
 # Mirrors
 alias upmr='sudo reflector --latest 10 --country BR,CL,US --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
