@@ -1,3 +1,6 @@
+### GPG
+export GPG_TTY=$(tty)
+
 # Antidote
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 # Set the name of the static .zsh plugins file antidote will generate.
@@ -25,6 +28,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # Load Pure Prompt on startup
 autoload -U promptinit; promptinit
 prompt powerlevel10k
@@ -32,22 +38,24 @@ prompt powerlevel10k
 # Aliases
 source ~/.zsh_aliases
 
-### GPG
-export GPG_TTY=$(tty)
-
 # Eza
 export LS_COLORS="di=31:*.git*=38;5;202:*.js=33:*.ts=34:*.md=37"
 export EZA_COLORS="uu=31:da=37"
 
+# Pazi
+if command -v pazi &>/dev/null; then
+  eval "$(pazi init zsh)" # or 'bash'
+fi
+
 # PNPM
-export PNPM_HOME="/home/daniellmiranda/.local/share/pnpm"
+export PNPM_HOME="/home/$USER/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
 # Bun
-[ -s "/home/daniellmiranda/.bun/_bun" ] && source "/home/daniellmiranda/.bun/_bun"
+[ -s "/home/$USER/.bun/_bun" ] && source "/home/$USER/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
@@ -67,5 +75,5 @@ export PATH=$PATH:"$ANDROID_HOME/cmdline-tools/tools/bin"
 export PATH=$PATH:"$ANDROID_HOME/platform-tools"
 alias adb=$ANDROID_HOME"/platform-tools/adb.exe"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Turso
+export PATH="/home/$USER/.turso:$PATH"
