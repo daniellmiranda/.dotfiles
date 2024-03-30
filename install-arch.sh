@@ -65,7 +65,7 @@ stow -t $HOME git
 
 # install JetBrainsMono NerdFont
 cd $SCRIPT_DIR
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBrainsMono.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip
 unzip JetBrainsMono.zip -d ./JetBrainsMonoNerdFont
 mv JetBrainsMonoNerdFont $HOME/.fonts
 rm -r ./JetBrainsMonoNerdFont
