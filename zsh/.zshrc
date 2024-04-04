@@ -42,11 +42,6 @@ source ~/.zsh_aliases
 export LS_COLORS="di=31:*.git*=38;5;202:*.js=33:*.ts=34:*.md=37"
 export EZA_COLORS="uu=31:da=37"
 
-# Pazi
-if command -v pazi &>/dev/null; then
-  eval "$(pazi init zsh)" # or 'bash'
-fi
-
 # PNPM
 export PNPM_HOME="/home/$USER/.local/share/pnpm"
 case ":$PATH:" in
@@ -77,3 +72,6 @@ alias adb=$ANDROID_HOME"/platform-tools/adb.exe"
 
 # Turso
 export PATH="/home/$USER/.turso:$PATH"
+
+# Zoxide
+eval "$(zoxide init zsh --cmd cd)"

@@ -11,9 +11,9 @@ ZSH_ALIASES=$HOME/.zsh_aliases
 GITCONFIG=$HOME/.gitconfig
 
 # packages to be installed
-packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'eza' 'sof-firmware' 'docker' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak')
+packages=('stow' 'git' 'zsh' 'zoxide' 'fzf' 'bat' 'reflector' 'neofetch' 'eza' 'sof-firmware' 'docker' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak')
 packages_groups=('base-devel')
-aur_packages=('zsh-antidote' 'pazi' 'visual-studio-code-bin')
+aur_packages=('zsh-antidote' 'visual-studio-code-bin')
 flatpak_packages=('com.raggesilver.BlackBox')
 
 # install packages in official repositories

@@ -15,7 +15,7 @@ GITCONFIG=$HOME/.gitconfig
 WINDOWS_TERMINAL=/mnt/c/Users/$WINDOWS_USERNAME/AppData/Local/Packages/Microsoft.WindowsTerminal_*/LocalState/
 
 # packages to be installed (in official Arch repos)
-packages=('git' 'zsh' 'stow' 'bat' 'reflector' 'neofetch' 'eza')
+packages=('stow' 'git' 'zsh' 'zoxide' 'fzf' 'bat' 'reflector' 'neofetch' 'eza')
 packages_groups=('base-devel')
 
 for i in ${packages[@]}; do
