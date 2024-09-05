@@ -1,25 +1,26 @@
 ### GPG
-export GPG_TTY=$(tty)
+export GPG_TTY=$TTY
 
 # Antidote
 source ${ZDOTDIR:-~}/.antidote/antidote.zsh
-# Set the name of the static .zsh plugins file antidote will generate.
-zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins.zsh
 
-# Ensure you have a .zsh_plugins.txt file where you can add plugins.
-[[ -f ${zsh_plugins:r}.txt ]] || touch ${zsh_plugins:r}.txt
+# Set the root name of the plugins files (.txt and .zsh) antidote will use.
+zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
 
-# Lazy-load antidote.
-fpath+=(${ZDOTDIR:-~}/.antidote)
-autoload -Uz $fpath[-1]/antidote
+# Ensure the .zsh_plugins.txt file exists so you can add plugins.
+[[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
 
-# Generate static file in a subshell when .zsh_plugins.txt is updated.
-if [[ ! $zsh_plugins -nt ${zsh_plugins:r}.txt ]]; then
-  (antidote bundle <${zsh_plugins:r}.txt >|$zsh_plugins)
+# Lazy-load antidote from its functions directory.
+fpath=(${ZDOTDIR:-~}/.antidote/functions $fpath)
+autoload -Uz antidote
+
+# Generate a new static file whenever .zsh_plugins.txt is updated.
+if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+  antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
 fi
 
 # Source your static plugins file.
-source $zsh_plugins
+source ${zsh_plugins}.zsh
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -31,9 +32,8 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Load Pure Prompt on startup
-autoload -U promptinit; promptinit
-prompt powerlevel10k
+# Load Powerlevel10k on startup
+autoload -Uz promptinit && promptinit && prompt powerlevel10k
 
 # Aliases
 source ~/.zsh_aliases
@@ -62,13 +62,6 @@ export NVM_DIR="$HOME/.nvm"
 # Java
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export PATH=$PATH:$JAVA_HOME/bin
-
-# Android
-export ANDROID_HOME="$HOME/Android"
-export PATH=$PATH:"$ANDROID_HOME/cmdline-tools/tools"
-export PATH=$PATH:"$ANDROID_HOME/cmdline-tools/tools/bin"
-export PATH=$PATH:"$ANDROID_HOME/platform-tools"
-alias adb=$ANDROID_HOME"/platform-tools/adb.exe"
 
 # Turso
 export PATH="/home/$USER/.turso:$PATH"
