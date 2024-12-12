@@ -8,3 +8,5 @@
 	editor = vim
 [commit]
 	gpgsign = true
+[fetch]
+	prune = true
