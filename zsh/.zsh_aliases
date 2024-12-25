@@ -1,7 +1,7 @@
 # Pacman
 alias i='sudo pacman -S'
 alias r='sudo pacman -Rscn'
-alias up='aura -Au && aura -Syu && bun upgrade --stable && aura -O'
+alias up='aura -Au && aura -Syu && bun upgrade --stable && aura -Oj'
 
 # Mirrors
 alias upmr='sudo reflector --latest 10 --country BR,CL,US --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
