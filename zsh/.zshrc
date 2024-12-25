@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 ### GPG
 export GPG_TTY=$TTY
 
@@ -22,13 +29,6 @@ fi
 # Source your static plugins file.
 source ${zsh_plugins}.zsh
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -42,17 +42,19 @@ source ~/.zsh_aliases
 export LS_COLORS="di=31:*.git*=38;5;202:*.js=33:*.ts=34:*.md=37"
 export EZA_COLORS="uu=31:da=37"
 
+# Android
+export ANDROID_HOME="$HOME/Android"
+export PATH=$PATH:"$ANDROID_HOME/cmdline-tools/tools"
+export PATH=$PATH:"$ANDROID_HOME/cmdline-tools/tools/bin"
+export PATH=$PATH:"$ANDROID_HOME/platform-tools"
+alias adb=$ANDROID_HOME"/platform-tools/adb.exe"
+
 # PNPM
 export PNPM_HOME="/home/$USER/.local/share/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-
-# Bun
-[ -s "/home/$USER/.bun/_bun" ] && source "/home/$USER/.bun/_bun"
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -68,3 +70,9 @@ export PATH="/home/$USER/.turso:$PATH"
 
 # Zoxide
 eval "$(zoxide init zsh --cmd cd)"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+# bun completions
+[ -s "/home/$USER/.bun/_bun" ] && source "/home/$USER/.bun/_bun"
