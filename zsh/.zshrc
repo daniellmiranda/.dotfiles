@@ -1,46 +1,56 @@
-### GPG
-export GPG_TTY=$TTY
+export GPG_TTY=$(tty)
 
-# Antidote
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+source /usr/share/zsh-antidote/antidote.zsh
 
-# Set the root name of the plugins files (.txt and .zsh) antidote will use.
-zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
+antidote load
 
-# Ensure the .zsh_plugins.txt file exists so you can add plugins.
-[[ -f ${zsh_plugins}.txt ]] || touch ${zsh_plugins}.txt
+# aliases
+alias i='sudo pacman -S'
+alias r='sudo pacman -Rscn'
+alias up='aura -Syu && aura -Au && aura -Oj'
+alias ls='eza -al --color=always --icons --group-directories-first --git'
+alias vim='nvim'
+alias upmr='sudo reflector --latest 10 --country BR,CL,US --protocol https --sort rate --save /etc/pacman.d/mirrorlist'
+alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+gp() {
+  git add .
+  git commit -m "$1"
+  git push
+}
+alias dps='docker ps --format="ID\t{{.ID}}\nNAME\t{{.Names}}\nImage\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"'
 
-# Lazy-load antidote from its functions directory.
-fpath=(${ZDOTDIR:-~}/.antidote/functions $fpath)
-autoload -Uz antidote
-
-# Generate a new static file whenever .zsh_plugins.txt is updated.
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-  antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
-fi
-
-# Source your static plugins file.
-source ${zsh_plugins}.zsh
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Load Powerlevel10k on startup
-autoload -Uz promptinit && promptinit && prompt powerlevel10k
-
-# Aliases
-source ~/.zsh_aliases
-
-# Eza
-export LS_COLORS="di=31:*.git*=38;5;202:*.js=33:*.ts=34:*.md=37"
+# eza
 export EZA_COLORS="uu=31:da=37"
+
+# Zoxide
+eval "$(zoxide init zsh --cmd cd)"
+
+# NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# bun completions
+[ -s "/home/daniellmiranda/.bun/_bun" ] && source "/home/daniellmiranda/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Turso
+export PATH="$PATH:/home/daniellmiranda/.turso"
+
+# pnpm
+export PNPM_HOME="/home/daniellmiranda/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Java
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export PATH=$PATH:$JAVA_HOME/bin
 
 # Android
 export ANDROID_HOME="$HOME/Android"
@@ -49,30 +59,4 @@ export PATH=$PATH:"$ANDROID_HOME/cmdline-tools/tools/bin"
 export PATH=$PATH:"$ANDROID_HOME/platform-tools"
 alias adb=$ANDROID_HOME"/platform-tools/adb.exe"
 
-# PNPM
-export PNPM_HOME="/home/$USER/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-
-# NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Java
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
-export PATH=$PATH:$JAVA_HOME/bin
-
-# Turso
-export PATH="/home/$USER/.turso:$PATH"
-
-# Zoxide
-eval "$(zoxide init zsh --cmd cd)"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-# bun completions
-[ -s "/home/$USER/.bun/_bun" ] && source "/home/$USER/.bun/_bun"
+eval "$(starship init zsh)"

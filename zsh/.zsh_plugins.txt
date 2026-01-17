@@ -1,9 +1,7 @@
-romkatv/powerlevel10k kind:fpath
-zsh-users/zsh-syntax-highlighting
 zsh-users/zsh-autosuggestions
-zsh-users/zsh-completions
-daniellmiranda/zsh-utils path:editor
+zdharma-continuum/fast-syntax-highlighting kind:defer
+zsh-users/zsh-history-substring-search
+zsh-users/zsh-completions kind:fpath path:src
+belak/zsh-utils path:editor
 belak/zsh-utils path:history
-belak/zsh-utils path:prompt
 belak/zsh-utils path:utility
-belak/zsh-utils path:completion

@@ -7,14 +7,13 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # files paths
 ZSHRC=$HOME/.zshrc
-ZSH_ALIASES=$HOME/.zsh_aliases
 GITCONFIG=$HOME/.gitconfig
 
 # packages to be installed
-packages=('stow' 'git' 'zsh' 'zoxide' 'fzf' 'bat' 'reflector' 'neofetch' 'eza' 'sof-firmware' 'docker' 'dbeaver' 'gnome-themes-extra' 'wget' 'flatpak')
+packages=('stow' 'git' 'zsh' 'zoxide' 'fzf' 'bat' 'reflector' 'eza' 'sof-firmware' 'docker' 'gnome-themes-extra' 'wget' 'flatpak', 'zed')
 packages_groups=('base-devel')
 aur_packages=('zsh-antidote' 'visual-studio-code-bin')
-flatpak_packages=('com.raggesilver.BlackBox')
+# flatpak_packages=('')
 
 # install packages in official repositories
 for i in ${packages[@]}; do
@@ -29,11 +28,11 @@ for i in ${packages_groups[@]}; do
   fi
 done
 
-for i in ${flatpak_packages[@]}; do
-  if ! pacman -Qg $i > /dev/null 2>&1; then
-    flatpak install flathub $i
-  fi
-done
+# for i in ${flatpak_packages[@]}; do
+#   if ! pacman -Qg $i > /dev/null 2>&1; then
+#     flatpak install flathub $i
+#   fi
+# done
 
 # installs Aura Package Manager from the AUR
 if ! pacman -Qi aura-bin > /dev/null 2>&1; then
@@ -55,18 +54,17 @@ done
 
 # zsh
 rm -f $ZSHRC
-rm -f $ZSH_ALIASES
 stow -t $HOME zsh
 chsh -s $(which zsh)
 
 # git
-rm -f $GITCONFIG 
+rm -f $GITCONFIG
 stow -t $HOME git
 
 # install JetBrainsMono NerdFont
 cd $SCRIPT_DIR
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip
-unzip JetBrainsMono.zip -d ./JetBrainsMonoNerdFont
-mv JetBrainsMonoNerdFont $HOME/.fonts
-rm -r ./JetBrainsMonoNerdFont
-rm ./JetBrainsMono.zip
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/GeistMono.zip
+unzip GeistMono.zip -d ./GeistMonoNerdFont
+mv GeistMonoNerdFont $HOME/.fonts
+rm -r ./GeistMonoNerdFont
+rm ./GeistMono.zip

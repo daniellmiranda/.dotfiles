@@ -2,11 +2,11 @@
 	name = Daniel L. Miranda
 	email = contact@daniellmiranda.dev
 	signingkey = 129009B65EF7FD1B
-[init]
-	defaultBranch = main
 [core]
 	editor = vim
 [commit]
 	gpgsign = true
 [fetch]
 	prune = true
+[push]
+	default = current
