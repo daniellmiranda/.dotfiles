@@ -3,7 +3,7 @@
 	email = contact@daniellmiranda.dev
 	signingkey = 129009B65EF7FD1B
 [core]
-	editor = vim
+	editor = nvim
 [commit]
 	gpgsign = true
 [fetch]
