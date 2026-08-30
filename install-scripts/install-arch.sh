@@ -28,7 +28,7 @@ install_package_groups "${packages_groups[@]}"
 install_aura "$SCRIPT_DIR"
 install_aur_packages "${aur_packages[@]}"
 
-setup_zsh "$DOTFILES_ROOT"
+setup_zsh "$DOTFILES_ROOT" "zsh-linux"
 change_shell_to_zsh
 setup_git "$DOTFILES_ROOT"
 

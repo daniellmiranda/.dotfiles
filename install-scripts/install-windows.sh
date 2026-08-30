@@ -29,7 +29,7 @@ install_packages "${packages[@]}"
 install_package_groups "${packages_groups[@]}"
 install_aura "$SCRIPT_DIR"
 
-setup_zsh "$DOTFILES_ROOT"
+setup_zsh "$DOTFILES_ROOT" "zsh-linux"
 setup_git "$DOTFILES_ROOT"
 
 WINDOWS_TERMINAL_SETTINGS="$DOTFILES_ROOT/windows-terminal/settings.json"
